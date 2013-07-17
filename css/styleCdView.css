@@ -183,6 +183,11 @@ ul.menu li span{
 	margin: 13px 12px 0px 0px;
 	background: url(../images/plus.png) no-repeat;
 }
+.mensagens .erro .linktorow{
+	cursor:pointer;
+	text-decoration:underline;
+	color:blue;
+}
 .detalhes{
 	background:#FFF3F3;
     -webkit-border-bottom-right-radius: 5px;
@@ -435,7 +440,7 @@ a[href='#topo']{
 	background-color:#000;
 	float:left;
 	width:inherit;
-	padding-left:20px;
+	padding-left: 35px;
 }
 .boxlinhaflash{
 	opacity:0.7;

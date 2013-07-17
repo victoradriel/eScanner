@@ -11,46 +11,65 @@
 
 	try{ gerartree(localStorage['jsonCode']); }
 	catch(err){ $("#chart").html("<center><h3>Não foi possível gerar a representação do código em árvore.</h3></center>"); }
-	
-	$(".code").text(localStorage['htmlCode']);
+
+	$(".code").text(addNumbers(localStorage['htmlCode']));
 	$("#pagName a").text(localStorage['pageName']).attr("href",localStorage['pageName']);
 	var erros = JSON.parse(localStorage['errosArray']);
+
+	var lineHeight = 19; // Altura das linhas e largura da marcação do erro no código
+	var marcacaoErr = new Array();	
 	
-	// Marca ocorrências //////////////////////////////////////////////////////////////////////////////////////////////////////
-	var lineHeight = 19; 	//Altura das linhas e largura da marcação do erro no código
-	for ( var i = 1; i < erros.length; i++ ){								
-		if((erros[i].tipo == 0)&&(erros[i].ocorrencia > 0)&&(i != 4)&&(i != 8)){
-			// Transforma string e deixa apenas numeros e virgulas
-			var from = erros[i].linha.indexOf(":");
-			var to = erros[i].linha.indexOf(".");
-			var linhas = erros[i].linha.substring(from+1,to);
-			linhas = linhas.replace(" e",",");
-			// Verifica se há um ou mais numeros na string
-			var ifcoma = linhas.indexOf(",");
-			if(ifcoma == -1){
-				$(".code").prepend("<div class='boxlinha' style='margin-top:"+ (linhas-1)*lineHeight +"px'><span>"+ erros[i].descricao +"</span></div>");
-			} else {
-				linhas = linhas.split(",");
-				for(var j = 0; j < linhas.length; j++){
-					$(".code").prepend("<div class='boxlinha' style='margin-top:"+ (linhas[j]-1)*lineHeight +"px'><span>"+ erros[i].descricao +"</span></div>");
+	// Exibe resultado prévio da análise //////////////////////////////////////////////////////////////////////////////////////	
+	var contEr = 0, contAl=0, primeiraOcorr = 1, qtdOcorr = 1;
+	$(".mensagens .resanalise").css("overflow-y","scroll");
+	$("#erros, #alertas").hide();
+			
+	for ( var i = 1; i < erros.length; i++ ){		
+		if((erros[i].tipo == 0)&&(erros[i].ocorrencia > 0)){
+			// Marca ocorrências //
+			if((i != 4)&&(i != 8)){ 
+				// Transforma string e deixa apenas numeros e virgulas
+				var from = erros[i].linha.indexOf(":");
+				var to = erros[i].linha.indexOf(".");
+				var linhas = erros[i].linha.substring(from+1,to);
+				linhas = linhas.replace(" e",",");
+
+				if(erros[i].ocorrencia == 1){
+					if(novaOcorrencia(linhas)){
+						$(".code").prepend("<div class='boxlinha "+linhas+"' style='margin-top:"+ (linhas-1)*lineHeight +"px'><span>[ "+ erros[i].descricao +" ] -- 1 ocorrência</span></div>");
+					}else{
+						// procura ocorrencia antiga e adiciona descrição
+						$(".code").find("div." + parseInt(linhas)).append("<br/><span>[ "+ erros[i].descricao +" ] -- 1 ocorrência</span>");
+					}
+				} else {
+					linhas = linhas.split(",");
+					for(var j = 0; j < linhas.length; j++){
+						if(novaOcorrencia(linhas[j])){
+							$(".code").prepend("<div class='boxlinha "+linhas[j]+"' style='margin-top:"+ (linhas[j]-1)*lineHeight +"px'><span class='descErr"+ i +"'>[ "+ erros[i].descricao +" ]</span></div>");
+							primeiraOcorr = 0;
+						}else{
+							// procura ocorrencia antiga do mesmo erro e adiciona descrição
+							if(primeiraOcorr) $(".code").find("div." + parseInt(linhas[j])).append("<br/><span class='descErr"+ i +"'>[ "+ erros[i].descricao +" ]</span>");
+							else qtdOcorr++;
+							primeiraOcorr = 0;
+						}
+					}
+					if(qtdOcorr == 1) $(".code").find("span.descErr" + parseInt(i)).append(" -- " + qtdOcorr + " ocorrência");
+					else $(".code").find("span.descErr" + parseInt(i)).append(" -- " + qtdOcorr + " ocorrências");
+					primeiraOcorr = 1;
+					qtdOcorr = 1;
 				}
-			}
+			} 
+			///////////////////////
+			contEr++;
+			erros[i].linha = linhaToSpan(erros[i].ocorrencia, erros[i].linha);
+			$(".grupoErros").append("<div class='item erro'><a href='#'></a><p>"+ erros[i].descricao + "" + erros[i].linha +"</p><div class='detalhes'>" + erros[i].detalhe +"</div></div>");
+		}
+		else if((erros[i].tipo == 1)&&(erros[i].ocorrencia > 0)){
+			contAl++;
+			$(".grupoAlertas").append("<div class='item alerta'><a href='#'></a><p>"+ erros[i].descricao + "</p><div class='detalhes'>" + erros[i].detalhe +"</div></div>");
 		}
 	}
-	// Marca interrupção da análise
-	if(erros[0].ocorrencia){
-		$(".code").prepend("<div class='boxlinha' style='margin-top:"+ (erros[0].linha-2)*lineHeight +"px; background:#000; text-align:center;'>A análise foi interrompida na linha abaixo! Verifique a linha "+ erros[0].linha +" do teu código.</div>");
-	}
-	
-	// Exibir e/ou esconder descrição do erro na linha marcada
-	$(".code").find(".boxlinha span").hide();
-	$(".code").find(".boxlinha").mouseover(function(){
-		var off = $(this).offset();
-		if(off.top <= 95) $(this).find("span").css("margin-top","19px").show();
-		else $(this).find("span").css("margin-top","-19px").show();
-	}).mouseleave(function(){
-		$(this).find("span").hide();
-	});
 	
 	// Adiciona sombra à caixa com o código quando o scroll é modificado
 	$(".mensagens .code").scroll(function(){
@@ -63,22 +82,30 @@
 		}
 	});
 	
-	// Exibe resultado prévio da análise //////////////////////////////////////////////////////////////////////////////////////	
-	var contEr = 0, contAl=0;
-	$(".mensagens .resanalise").css("overflow-y","scroll");
-	$("#erros, #alertas").hide();
-	
-	for ( var i = 1; i < erros.length; i++ ){
-		if((erros[i].tipo == 0)&&(erros[i].ocorrencia > 0)){
-			contEr++;
-			erros[i].linha = formataLinhas(erros[i].ocorrencia, erros[i].linha);
-			$(".grupoErros").append("<div class='item erro'><a href='#'></a><p>"+ erros[i].descricao + "</p><div class='detalhes'>" + erros[i].detalhe +"</div></div>");
-		}
-		else if((erros[i].tipo == 1)&&(erros[i].ocorrencia > 0)){
-			contAl++;
-			$(".grupoAlertas").append("<div class='item alerta'><a href='#'></a><p>"+ erros[i].descricao + "</p><div class='detalhes'>" + erros[i].detalhe +"</div></div>");
-		}
+	// Marca ocorrência de interrupção da análise
+	if(erros[0].ocorrencia){
+		$(".code").prepend("<div class='boxlinha' style='margin-top:"+ (erros[0].linha-2)*lineHeight +"px; background:#000; text-align:center;'>A análise foi interrompida na linha abaixo! Verifique a linha "+ erros[0].linha +" do teu código.</div>");
+		$(".code").prepend("<div class='boxlinha' style='margin-top:"+ (erros[0].linha-1)*lineHeight +"px; text-align:center;'></div>");
 	}
+	
+	// Exibir e/ou esconder descrição do erro na linha marcada
+	$(".code").find(".boxlinha span").hide();
+	$(".code").find(".boxlinha").mouseover(function(){
+		var off = $(this).offset();
+		var countspans = $(this).find("span").size();		
+		countspans = countspans * 19;
+		if(off.top <= 76 + countspans){
+			$(this).find("span").css("margin-top","0px").show();
+			$(this).find("span:first").css("margin-top","19px").show();
+		} else {			
+			$(this).find("span").css("margin-top","-"+countspans+"px").show();
+		}
+	}).mouseleave(function(){
+		$(this).find("span").hide();
+	});
+
+	// Alternar cores dos spans com descrição do erro
+	$(".code").find(".boxlinha span:even").css("background","#0A0A0A");
 	
 	// Atualizar menu com quantidades de alertas e erros
 	if(contEr == 1) $("#resumo ul li a:first").html(contEr + " erro");
@@ -102,6 +129,13 @@
 			$(this).css("background","url(../images/plus.png)");
 		}
 	);
+
+	// Saltar para linha marcada
+	$(".linktorow").click(function(){
+		var torow = $(this).attr("class");
+		torow = torow.replace("linktorow ","");
+		saltaPara(torow);
+	});
 	
 	// Gerar visualização do código em forma de árvore radial /////////////////////////////////////////////////////////////////
 	function gerartree(jsontext){			
@@ -154,10 +188,7 @@
 			})
 			.on("click", function(d){
 				if(d.row != -1){
-					$(".code").prepend("<div id='destaque' class='boxlinhaflash' style='margin-top:"+ (d.row - 1)*lineHeight +"px'>_</div>");
-					var alt = $(".code").find("#destaque").height();
-					$(".code").scrollTop(alt*(d.row-1));
-					$(".code").find("#destaque").fadeOut(1000);
+					saltaPara(d.row);
 				}
 			});
 
@@ -227,23 +258,62 @@
 		}
 	}
 	
-	function formataLinhas(ocorrencia, linha){
-		// Substitui ultima virgula por ponto
-		var num = linha.lastIndexOf(",");
-		linha = linha.slice(0,num).concat(".");
-		
-		if(ocorrencia > 1){
-			// Substitui penultima virgula pela conunção 'e'
-			num = linha.lastIndexOf(",");
-			num2 = linha.lastIndexOf(".");
-			st = linha.slice(0,num).concat(" e");
-			linha = st.concat(linha.slice(num+1,num2+1));
+	function novaOcorrencia(linha){
+		if(marcacaoErr[linha] == 1){
+			return 0;
 		}
-		else if(ocorrencia == 1){
-			linha = linha.replace("nas linhas","na linha");
+		else{			
+			marcacaoErr[linha] = 1;
+			return 1;
+		}		
+	}
+
+	function saltaPara(linha){
+		$(".code").prepend("<div id='destaque' class='boxlinhaflash' style='margin-top:"+ (linha - 1)*lineHeight +"px'>_</div>");
+		var alt = $(".code").find("#destaque").height();
+		$(".code").scrollTop(alt*(linha-1));
+		$(".code").find("#destaque").fadeOut(1000);
+	}
+	
+	function linhaToSpan(ocorrencia, linha){
+		if((i != 4)&&(i != 8)){ 
+			var from = erros[i].linha.indexOf(":");
+			var to = erros[i].linha.indexOf(".");
+			var linhas = erros[i].linha.substring(from+1,to);
+			linhas = linhas.replace(" e",",");
+
+			if(ocorrencia == 1){
+				linhas = linhas.replace(" ","");
+				linha = ", na linha: <span class='linktorow "+linhas+"'>"+linhas+"</span>.";
+			} else {
+				linhas = linhas.split(",");
+				linha = ", nas linhas: "
+				for(var j = 0; j < linhas.length; j++){
+					linhas[j] = linhas[j].replace(" ","");
+					linha = linha.concat("<span class='linktorow "+linhas[j]+"'>"+linhas[j]+"</span>, ");
+				}
+				// Substitui ultima virgula por ponto
+				var num = linha.lastIndexOf(",");
+				linha = linha.slice(0,num).concat(".");
+
+				// Substitui penultima virgula pela conjunção 'e'
+				num = linha.lastIndexOf(",");
+				num2 = linha.lastIndexOf(".");
+				st = linha.slice(0,num).concat(" e");
+				linha = st.concat(linha.slice(num+1,num2+1));
+			}
 		}
-		
 		return linha;
+	}
+
+	function addNumbers(htmlCode) {
+		var codeNum = "";
+		htmlCode = htmlCode.split("\n");		
+		for(var j = 0; j < htmlCode.length; j++){
+			if(j<9) codeNum = codeNum + 0;
+			codeNum = codeNum + (j+1) + "\t " + htmlCode[j] + "\n";
+		}
+		return codeNum;
 	}
 	
 	$(window).resize(function(){

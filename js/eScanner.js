@@ -29,7 +29,7 @@
 		linha = linha.slice(0,num).concat(".");
 		
 		if(ocorrencia > 1){
-			// Substitui penultima virgula pela conunção 'e'
+			// Substitui penultima virgula pela conjunção 'e'
 			num = linha.lastIndexOf(",");
 			num2 = linha.lastIndexOf(".");
 			st = linha.slice(0,num).concat(" e");
