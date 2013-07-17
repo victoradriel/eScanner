@@ -1,0 +1,157 @@
+<!DOCTYPE>
+<html lang="pt-br">
+    <head><title>eScanner</title><link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8"/></head>
+    <body>
+		<div id="all">
+			<div class="backmenu">
+				<div class="navigation">
+					<ul class="menu" id="menu">
+						<li><a href="popup.html">Resultados</a></li>
+						<li><a href="sobre_emag.html">Sobre o e-MAG</a></li>
+						<li><a href="tutoriais.html">Tutoriais</a></li>
+						<li><a class="ativa" href="ajuda.html">Ajuda</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="container">
+				<div class="help">
+					<div id="topo" name="topo"></div>
+					<h2>Manual de usuário</h2>
+					<div class="item">
+						<div class="left">
+							<ul>
+								<li><a href="#como" class="bord">Como usar?</a></li>
+								<li><a href="#resultado">Resultado da análise</a></li>
+								<li><a href="#quando">Quando a análise falha</a></li>
+								<li><a href="#identificacao">Identificação de erros</a></li>
+								<li><a href="#emissao">Emissão de alertas</a></li>
+							</ul>
+						</div>
+						<div class="right">
+							<ul>
+								<li><a href="#elementos" class="bord">Elementos da página de exibição dos resultados</a></li>
+								<li><a href="#menuquant">Menu com as quantidades de erros e alertas</a></li>
+								<li><a href="#boxprincipal">Box principal</a></li>
+								<li><a href="#listas">Lista de erros e lista de alertas</a></li>
+								<li><a href="#telas">Demais telas</a></li>
+							</ul>
+						</div>
+					</div>
+					
+					<p>O eScanner é uma extensão desenvolvida para o navegador Google Chrome que funciona como um <span class="i">browser action</span>. Isso significa que quando instalada seu ícone fará parte da barra de tarefas principal do navegador. Para iniciar a análise de uma página é necessário apenas clicar em seu ícone.</p>
+					
+					<img src="images/help/barraic.png" alt="Ícone do eScanner" title="Imagem do ícone do eScanner" style="margin-left:62px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:62px">Ícone do eScanner na barra de ferramentas do Google Chrome.</span>
+
+					<div class="item tituloHelp" id="como" name="como">
+					<h3>Como usar?</h3>
+					</div>
+					<p>Ao clicar no ícone do eScanner na barra de ferramenta, a análise da página é iniciada automaticamente e logo depois aparecerá o resultado, que pode ser o sucesso da análise apresentando a relação de erros e alertas ou a informação de que não foram encontrados erros no código fonte ou, ainda, a impossibilidade de realizar a análise.</p>
+					
+					<img src="images/help/1telainicial.png" alt="Tela principal" title="Imagem da tela principal" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Tela principal do eScanner exibindo avaliação da página aberta.</span>
+					
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="resultado" name="resultado">
+					<h3>Resultado da análise</h3>
+					</div>
+					<p>O e-MAG, em sua versão 3.0, aboliu a divisão das suas recomendações de acessibilidade em níveis de prioridade, pois o padrão é voltado às páginas do Governo, não sendo permitidas então exceções com relação ao cumprimento das recomendações. Logo, todas as recoendações são igualmente relevantes.</p>
+					<p>Todas as recomendações que dependem da avaliação manual do usuário da extensão são emitidas como alertas. Já todas as recomendações que podem ser verificadas apenas a partir da análise automática do código fonte são classificadas como erros.</p>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="quando" name="quando">
+					<h3>Quando a análise falha</h3>
+					</div>
+					<p>A análise da página pode não ocorrer quando não é possível capturar o código fonte da página ou quando há erros de sintaxe no código fonte que não conseguem ser tratados pelo parser do eScanner.</p>
+
+					<p>Caso seja exibida a mensagem:<br/>
+					<img src="images/help/fail2.PNG" alt="Que estranho... Não foi possível capturar o código fonte desta página. Tente outra vez ou teste outra página."/>
+					<br/>siginifica que a requisição feita ao servidor da página foi concluída, mas retornou com resposta uma string vazia, ou seja, sem o código fonte da página requisitada.</p>
+
+					<p>Caso seja exibida a mensagem:<br/>
+					<img src="images/help/fail1.PNG" alt="Desculpe, o eScanner não conseguiu terminar sua análise. O servidor não respondeu a requisição ou existe algum elemento que não faz parte da sintaxe padrão do XHTML. Verifique seu código fonte e o servidor e tente outra vez."/>
+					<br/>siginifica que o eScanner não conseguiu concluir sua avaliação, seja por um erro sintático que seu parser não consegue tratar ou pela impossibilidade de concluir a requisição ao servidor. Ocorrem várias tentativas de completar a análise até exibir a mensagem indicando a impossibilidade em realizar a análise da página.</p>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="identificacao" name="identificacao">
+					<h3>Identificação de erros</h3>
+					</div>
+					<p>Os erros são mostrados em vermelho na janela principal e representam as recomendações que podem ser verificadas diretamente a partir da análise do código fonte. Por exemplo, todas as imagens no código HTML, segundo as especificações do e-MAG, precisam ter uma descrição através do atributo alt. A ausência ou ocorrência deste atributo nos elementos imagem pode ser facilmente detectada no código fonte, logo essa recomendação é classificada como um erro na abordagem utilizada.</p>
+					
+					<img src="images/help/erros.png" alt="Relação de erros" title="Imagem da relação de erros" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Fragmento da lista de erros, exibidos em vermelho.</span>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="emissao" name="emissao">
+					<h3>Emissão de alertas</h3>
+					</div>
+					<p>Os alertas aparecem em amarelo em uma lista separada da lista de erros. Apesar dos alertas significarem todas as recomendações do e-MAG que não são detectáveis automaticamente, sua emissão nem sempre ocorre. Delas, 15 (quinze) sempre são exibidas independente da página avaliada. Os outros alertas dependem da ocorrência de outros elementos para serem exibidos na tela.</p>
+					<p>Por exemplo, a recomendação nº 42 do e-MAG pede que sejam fornecidas instruções para entrada de dados em campos de formulário, logo essa recomendação é exibida como um alerta e só se aplica a uma página se houver qualquer elemento de formulário contido nela.</p>
+					
+					<img src="images/help/alertas.png" alt="Relação de alertas" title="Imagem da relação de alertas" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Fragmento da lista de alertas, exibidos em amarelo.</span>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="elementos" name="elementos">
+					<h3>Elementos da página de exibição dos resultados</h3>
+					</div>
+					<p>A página de exibição dos resultados é a tela principal do programa e é composta pelos seguintes elementos:
+					<br/>a) <a href="#menuquant">Menu com as quantidades de erros e alertas</a>: composto por âncoras de atalho direto para a lista de erros e para a lista de alertas;
+					<br/>b) <a href="#boxprincipal">Box principal</a>: apresenta mensagens sobre o status do processo de análise;
+					<br/>c) <a href="#listas">Lista de erros</a>: descrição dos erros detectados na página;
+					<br/>d) <a href="#listas">Lista de alertas</a>: descrição das recomendações que podem se aplicar à página.</p>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="menuquant" name="menuquant">
+					<h3>Menu com as quantidades de erros e alertas</h3>
+					</div>
+					<p>Além da quantidade de alertas e da quantidade de erros detectados na análise da página, o menu também serve como atalho para avançar direto às listas de erros e alertas.</p>
+					
+					<img src="images/help/compmenu.png" alt="Menu de atalho" title="Imagem do menu de atalho" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Em destaque, menu de atalhos para as listas de erros e alertas.</span>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="boxprincipal" name="boxprincipal">
+					<h3>Box principal</h3>
+					</div>
+					<p>São cinco as possíveis mensagens que podem aparecer nessa área:
+					<br/>a) A mensagem de que não foi possível capturar o código fonte da página;
+					<br/>b) A mensagem de que não foi possível realizar a análise da página;
+					<br/>c) A mensagem sobre a quantidade de erros e sobre a importância de observar os alertas emitidos, ou;
+					<br/>d) A mensagem sobre a não existência de erros e sobre a importância de observar os alertas emitidos.</p>
+					
+					<img src="images/help/compbox.png" alt="Box principal" title="Imagem do box principal" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Em destaque, box onde é mostrado o estado do programa.</span>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="listas" name="listas">
+					<h3>Lista de erros e lista de alertas</h3>
+					</div>
+					<p>A relação de erros contém uma descrição sintética do erro e a recomendação do e-MAG em que o erro se aplica. Da mesma forma, a relação dos alertas contém uma descrição sintética do alerta e a recomendação do e-MAG em que este se aplica.</p>
+					
+					<img src="images/help/complistas.png" alt="Listas de erros e alertas" title="Imagem das listas de erros e alertas" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Em destaque, listas de erros e alertas.</span>
+					<br/>
+					<br/>
+					<img src="images/help/recsintetica.png" alt="Detalhes sobre um erro" title="Imagem dos detalhes sobre um erro" style="margin-left:50px"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Os detalhes sobre um erro(e/ou alerta) são apresentados de forma sintética.</span>
+
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="telas" name="telas">
+					<h3>Demais telas</h3>
+					</div>
+					<p>O eScanner possui uma área para referências sobre o e-MAG, uma área com referências a tutoriais e outras ferramentas de avaliação de acessibilidade e uma área de ajuda quanto à utilização do programa.
+
+					<br/><br/>* Sobre o e-MAG
+					<br/>Nesta tela há uma breve descrição sobre o Modelo de Acessibilidade de Governo Eletrônico, e links para o download da versão 3.0 do e-MAG e para o site do Departamento de Governo Eletrônico.
+					<br/><br/>* Tutoriais
+					<br/>Nesta tela há links para tutoriais disponibilizados pelo Departamento de Governo Eletrônico e uma relação de outros softwares para avaliação e validação de acessibilidade de páginas Web.
+					<br/><br/>* Ajuda
+					<br/>Nesta tela constam informações sobre a extensão e sobre sua utilização.</p>
+					
+					<a href="#topo">voltar ao menu</a>
+				</div>				
+			</div>
+		</div>
+    </body>
+</html>

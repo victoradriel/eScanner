@@ -1,6 +1,6 @@
 <!DOCTYPE>
-<html>
-    <head><link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8"/></head>
+<html lang="pt-br">
+    <head><title>eScanner</title><link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8"/></head>
     <body>
 		<div id="all">
 			<div class="backmenu">
@@ -106,7 +106,7 @@
 								$(".detalhes").hide();
 								
 								if(contEr == 1){
-									$(".item:first").html("<p>Foi identificado <b>" + contEr + " erro no seu código de acordo as recomendações do e-MAG.</p><p>Verifique os alertas, pois são recomendações que dependem da avaliação do programador.</p>"); 
+									$(".item:first").html("<p>Foi identificado <b>" + contEr + " erro no seu código de acordo as recomendações do<br/> e-MAG.</p><p>Verifique os alertas, pois são recomendações que dependem da avaliação do programador.</p>"); 
 									$("#resumo ul li a:first").html(contEr + " erro"); 							
 								
 								} else if(contEr > 1){
@@ -114,7 +114,7 @@
 									$("#resumo ul li a:first").html(contEr + " erros"); 							
 								
 								} else{
-									$(".item:first").html("<p>Não foram identificados erros no seu código de acordo as recomendações do e-MAG, em sua versão 3.0. <br/>Para uma análise mais detalhada utilize o validador <a href='http://www.dasilva.org.br/'>daSilva</a>.</p><p>Não deixe de verificar os alertas, pois são recomendações que dependem da avaliação do programador.</p>"); 
+									$(".item:first").html("<p>Não foram identificados erros no seu código de acordo as recomendações do e-MAG, em sua versão 3.0. <br/>Para uma análise mais detalhada utilize o validador <a href='http://www.dasilva.org.br/'>daSilva</a><br/>ou o <a href='http://www.governoeletronico.gov.br/acoes-e-projetos/e-MAG/ases-avaliador-e-simulador-de-acessibilidade-sitios'>Avaliador e Simulador de Acessibilidade de Sítios - ASES</a>.</p><p>Não deixe de verificar os alertas, pois são recomendações que dependem da avaliação do programador.</p>"); 
 									$("#resumo ul li a:first").html(contEr + " erros"); 							
 								}
 								
@@ -141,8 +141,11 @@
 								);
 								
 								$("div.item:first a").css({"text-decoration":"underline","color":"blue"});
-								$("div.item:first a").click(function(){
+								$("div.item:first a:first").click(function(){
 									chrome.tabs.create({'url': 'http://www.dasilva.org.br/'}, function(tab){ });
+								});
+								$("div.item:first a:last").click(function(){
+									chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/acoes-e-projetos/e-MAG/ases-avaliador-e-simulador-de-acessibilidade-sitios/'}, function(tab){ });
 								});
 							}	
 						}
@@ -167,5 +170,8 @@
 				alteraURL(tab.url);
 			});
         </script>
+		<noscript>
+			<p>O JavaScript não está funcionando, você pode ter problemas ao utilizar esta página.</p>
+		</noscript>
     </body>
 </html>
