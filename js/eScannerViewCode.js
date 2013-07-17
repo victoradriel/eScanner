@@ -272,7 +272,7 @@ $().ready(function(){
 	}
 
 	function saltaPara(linha){
-		$(".code").prepend("<div id='destaque' class='boxlinhaflash' style='margin-top:"+ (linha - 1)*lineHeight +"px'>_</div>");
+		$(".code").prepend("<div id='destaque' class='boxlinhaflash' style='margin-left: "+ $(".mensagens .code").scrollLeft() +"; margin-top:"+ (linha - 1)*lineHeight +"px'>_</div>");
 		var alt = $(".code").find("#destaque").height();
 		$(".code").scrollTop(alt*(linha-1));
 		$(".code").find("#destaque").fadeOut(1000);
