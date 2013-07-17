@@ -95,6 +95,7 @@
 	mens[52] = new mensDetail(1, 0, "Fornecer sugestão de preenchimento em campos de entrada.", "<span>Recomendação 42:</span><h4>Fornecer instruções para entrada de dados.</h4><p>Para conteúdo que exigir entrada de dados por parte do usuário, devem ser fornecidas, quando necessário, instruções de preenchimento juntamente com as etiquetas (label).</p>", "");
 	mens[53] = new mensDetail(1, 0, "Identificar e descrever erros em dados de entrada.", "<span>Recomendação 43:</span><h4>Identificar e descrever erros de entrada de dados.</h4><p>Quando um erro de entrada de dados for automaticamente detectado, o item que apresenta erro deve ser identificado e descrito ao usuário por texto.</p>", "");
 	mens[54] = new mensDetail(1, 0, "Fornecer CAPTCHA em formulário.", "<span>Recomendação 45:</span><h4>Fornecer CAPTCHA humano.</h4><p>O CAPTCHA (teste interativo humano, completamente automatizado, para distinguir computadores de seres humanos) deverá ser utilizado apenas quando estritamente necessário. Quando utilizado, deverá ser fornecido em forma de uma pergunta não seja de difícil resolução, permitindo que a mesma possa ser respondida por pessoas de variadas culturas e níveis de instrução.</p>", "");
+	mens[55] = new mensDetail(2, 0, "", "", "");
 	
 	// Inicializa array flag para controle de erros
 	codErr = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);	
@@ -103,6 +104,8 @@
 	//arrFlag[3] - Sem uso 
 	arrFlag = new Array(0,0,0,0,-579,0,0,0,0,0,0,0,0,0,0);
 	
+	first = 1;
+	firstCtag = 1;
 	var HTMLParser = this.HTMLParser = function( html, handler ) {
 
 		var index, chars, match, stack = [], last = html;
@@ -215,7 +218,7 @@
 			if ( block[ tagName ] ) {
 				while ( stack.last() && inline[ stack.last() ] ) {
 					parseEndTag( "", stack.last() );
-				}
+				}	
 			}
 
 			if ( closeSelf[ tagName ] && stack.last() == tagName ) {
@@ -224,8 +227,17 @@
 
 			unary = empty[ tagName ] || !!unary;
 
-			if ( !unary )
+			if ( !unary ){
 				stack.push( tagName );
+				
+				// Prototipo para gerar versão JSON do código ////////////////////// ///////////////////
+				if(first){ mens[55].detalhe += '{ "name" : "'+ tagName +'" '; first = 0; firstCtag = 1;}
+				else{ mens[55].detalhe += ', "children": [ { "name" : "'+ tagName +'" ';}
+				//////////////////////////////////////////////////////////////////// ///////////////////
+			}
+			else{
+				mens[55].detalhe += '{ "name" : "'+ tagName +'" }, ';
+			}
 
 			// Sinaliza a presença de um elemento do tipo imagem (type="image")
 			arrFlag[9]=0;
@@ -438,6 +450,15 @@
 				// Remove os elementos abertos da pilha
 				stack.length = pos;
 			}
+			
+			// Prototipo para gerar versão JSON do código //////////////////////
+			if(firstCtag){ mens[55].detalhe += '}, '; firstCtag = 0; first = 1;}
+			else{ 
+				var numaux = mens[55].detalhe.lastIndexOf(", ");
+				mens[55].detalhe = mens[55].detalhe.slice(0,numaux);
+				mens[55].detalhe += ']}, ';
+			}
+			////////////////////////////////////////////////////////////////////
 		}
 	};
 	
@@ -472,6 +493,10 @@
 			}
 		});
 		
+		// Prototipo para gerar versão JSON do código //////////////////////
+		var auxgamb = mens[55].detalhe.lastIndexOf(']}, ');
+		mens[55].detalhe = mens[55].detalhe.slice(0,auxgamb);
+		////////////////////////////////////////////////////////////////////
 		return mens;
 	};
 	
