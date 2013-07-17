@@ -9,14 +9,14 @@
 			<div class="backmenu">
 				<div class="navigation">
 					<ul class="menu" id="menu">
-						<li><a href="viewCode.html" style="color:#777;">Salvar</a></li>
+						<li><a class="ativa" href="viewCode.html">Ver Código</a></li>
 						<li><a href="sobre_emag.html">Sobre o e-MAG</a></li>
 						<li><a href="tutoriais.html">Tutoriais</a></li>
 						<li><a href="ajuda.html">Ajuda</a></li>
 					</ul>
 				</div>
 			</div>
-			<div class="container">
+			<div class="containerViewer">
 				<div class="mensagens">
 					<div id="titulo">
 						<h2>Revisor de Código Fonte</h2>
@@ -39,7 +39,11 @@
 		<script type="text/javascript" src="../js/d3.v2.js"></script>
 		<link type="text/css" rel="stylesheet" href="../css/tree.css"/>
 		<script type="text/javascript">
-		gerartree(localStorage['jsonCode']);
+		try{
+			gerartree(localStorage['jsonCode']);
+		}catch(err){
+			$("#chart").html("<center><h3>Não foi possível gerar a representação do código em árvore.</h3></center>");
+		}
 		$(".code").text(localStorage['htmlCode']);
 		$("#pagName a").text(localStorage['pageName']).attr("href",localStorage['pageName']);
 		var erros = JSON.parse(localStorage['errosArray']);
@@ -48,8 +52,6 @@
 		for ( var i = 0; i < erros.length; i++ ){								
 			if((erros[i].tipo == 0)&&(erros[i].ocorrencia > 0)){
 				// Transforma string e deixa apenas numeros e virgulas
-				//alert(erros[i].descricao);
-				
 				var from = erros[i].linha.indexOf(":");
 				var to = erros[i].linha.indexOf(".");
 				var linhas = erros[i].linha.substring(from+1,to);

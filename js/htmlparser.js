@@ -40,7 +40,7 @@
 	
 	// Inicializa array de mensagens (erros/alertas)
 	mens = new Array();
-	mens[0] = new mensDetail(0, 0, "Ausência do atributo 'alt' em zona de imagem", "", ", nas linhas: "); // Não utilizado
+	mens[0] = new mensDetail(0, 0, "Variavel para armazenamento de erros no processo de análise", "Uso do sistema", ""); // Status 0:SUCCESS / 1:ERROR 
 	mens[1] = new mensDetail(0, 0, "Múltiplas ocorrências do elemento 'H1'", "<span>Recomendação 3:</span><h4>Utilizar corretamente os níveis de cabeçalho.</h4><p>Os níveis de cabeçalho devem ser utilizados de forma lógica e semântica para facilitar a leitura e compreensão. Cada página deverá ter apenas um h1, já os níveis do h2 ao h6 poderão ser utilizados mais de uma vez na página.</p>", ", nas linhas: ");
 	mens[2] = new mensDetail(0, 0, "Valor do atributo tabindex menor que anterior", "<span>Recomendação 4:</span><h4>Ordenar de forma lógica e intuitiva a leitura e tabulação.</h4><p>Deve-se criar o código HTML com uma sequência lógica de leitura para percorrer links, controles de formulários e objetos. Essa sequência é determinada pela ordem que se encontra no código HTML. O atributo tabindex somente deverá ser utilizado quando existir real necessidade e deve se evitar uma ordem de tabulação inconsistente.</p>", ", nas linhas: ");
 	mens[3] = new mensDetail(0, 0, "Ocorrência de target='_blank'", "<span>Recomendação 9:</span><h4>Não abrir novas instâncias sem a solicitação do usuário.</h4><p>A decisão de utilizar novas instâncias é do cidadão. Assim, não devem ser utilizadas pop-ups ou abertas novas abas e/ou janelas, por exemplo, que não tenham sido solicitadas pelo usuário. Obs: A função 'alert' do javascript não gera um pop-up, mas uma mensagem que pode ser lida por leitores de tela.</p>", ", nas linhas: ");
@@ -118,95 +118,106 @@
 			return this[ this.length - 1 ];
 		};
 
-		while ( html ) {
+		try{
+			while(html){
+				chars = true;
+
+				// Para ter certeza de não estar em um elemento 'style'
+				if ( !stack.last() || !special[ stack.last() ] ) {
+
+					// Comentário
+					if ( html.indexOf("<!--") == 0 ) {
+						index = html.indexOf("-->");
+
+						if ( index >= 0 ) {
+							if ( handler.comment )
+								handler.comment( html.substring( 4, index ) );
+							html = html.substring( index + 3 );
+							chars = false;
+						}
+
+					// Doctype
+					} else if ( html.indexOf("<!") == 0 ) {
+						index = html.indexOf(">");
 		
-			chars = true;
+						if ( index >= 0 ) {
+							if ( handler.doctype )
+								handler.doctype( html.substring( 2, index ) );
+							html = html.substring( index + 1 );
+							chars = false;
+						}
 
-			// Para ter certeza de não estar em um elemento 'style'
-			if ( !stack.last() || !special[ stack.last() ] ) {
+					// Tag de fechamento
+					} else if ( html.indexOf("</") == 0 ) {
+						match = html.match( endTag );
+						
+						// Esquece última tag lida
+						arrFlag[14] = " "; 
+						
+						if ( match ) {
+							html = html.substring( match[0].length );
+							match[0].replace( endTag, parseEndTag );
+							chars = false;
+						}
 
-				// Comentário
-				if ( html.indexOf("<!--") == 0 ) {
-					index = html.indexOf("-->");
+					// Tag de abertura
+					} else if ( html.indexOf("<") == 0 ) {
+						match = html.match( startTag );
+						
+						// Armazena última tag lida
+						arrFlag[14] = match[1]; 
+						
+						if ( match ) {
+							html = html.substring( match[0].length );
+							match[0].replace( startTag, parseStartTag );
+							chars = false;
+						}
+					}
+					
+					if ( chars ) {
+						// Se a última tag lida foi <script> ignora seu conteúdo
+						// caso contrário, procura início de nova tag
+						arrFlag[14] == "script" ? index = html.indexOf("</script>") : index = html.indexOf("<");
+						
+						// Esquece última tag lida
+						arrFlag[14] = " "; 
+						
+						var text = index < 0 ? html : html.substring( 0, index );
+						html = index < 0 ? "" : html.substring( index );
 
-					if ( index >= 0 ) {
-						if ( handler.comment )
-							handler.comment( html.substring( 4, index ) );
-						html = html.substring( index + 3 );
-						chars = false;
+						if ( handler.chars )
+							handler.chars( text );
 					}
 
-				// Doctype
-				} else if ( html.indexOf("<!") == 0 ) {
-					index = html.indexOf(">");
-	
-					if ( index >= 0 ) {
-						if ( handler.doctype )
-							handler.doctype( html.substring( 2, index ) );
-						html = html.substring( index + 1 );
-						chars = false;
-					}
+				} else {
+					html = html.replace(new RegExp("(.*)<\/" + stack.last() + "[^>]*>"), function(all, text){
+						text = text.replace(/<!--(.*?)-->/g, "$1")
+							.replace(/<!\[CDATA\[(.*?)]]>/g, "$1");
 
-				// Tag de fechamento
-				} else if ( html.indexOf("</") == 0 ) {
-					match = html.match( endTag );
-					
-					// Esquece última tag lida
-					arrFlag[14] = " "; 
-					
-					if ( match ) {
-						html = html.substring( match[0].length );
-						match[0].replace( endTag, parseEndTag );
-						chars = false;
-					}
+						if ( handler.chars )
+							handler.chars( text );
 
-				// Tag de abertura
-				} else if ( html.indexOf("<") == 0 ) {
-					match = html.match( startTag );
-					
-					// Armazena última tag lida
-					arrFlag[14] = match[1]; 
-					
-					if ( match ) {
-						html = html.substring( match[0].length );
-						match[0].replace( startTag, parseStartTag );
-						chars = false;
-					}
-				}
-				
-				if ( chars ) {
-					// Se a última tag lida foi <script> ignora seu conteúdo
-					// caso contrário, procura início de nova tag
-					arrFlag[14] == "script" ? index = html.indexOf("</script>") : index = html.indexOf("<");
-					
-					// Esquece última tag lida
-					arrFlag[14] = " "; 
-					
-					var text = index < 0 ? html : html.substring( 0, index );
-					html = index < 0 ? "" : html.substring( index );
+						return "";
+					});
 
-					if ( handler.chars )
-						handler.chars( text );
+					parseEndTag( "", stack.last() );
 				}
 
-			} else {
-				html = html.replace(new RegExp("(.*)<\/" + stack.last() + "[^>]*>"), function(all, text){
-					text = text.replace(/<!--(.*?)-->/g, "$1")
-						.replace(/<!\[CDATA\[(.*?)]]>/g, "$1");
-
-					if ( handler.chars )
-						handler.chars( text );
-
-					return "";
-				});
-
-				parseEndTag( "", stack.last() );
+				if ( html == last )
+					throw "Parse Error: " + html;
+				last = html;
 			}
+		} catch(err){
+			// Total de linhas restantes no código HTML
+			var htmlleft = html.split("\n");
+			var rowsleft = htmlleft.length;
+			// Linha onde ocorreu o erro: rowsright + 1
+			var rowsocc = (rows - rowsleft) + 1;
 
-			if ( html == last )
-				throw "Parse Error: " + html;
-			last = html;
+			mens[0].ocorrencia = 1; 
+			mens[0].linha = mens[0].linha + rowsocc;
 		}
+		
 		
 		// Tratamento de erro: limpa tags remanecentes
 		parseEndTag();

@@ -37,12 +37,12 @@ body{
 	margin:0px;
 	padding:0px;
 	overflow-x:hidden;
+	background-color:#f0f0f0;
 }
 #all{
 	margin:0px;
 	padding:0px;
 	height:100%;
-	background-color:#f0f0f0;
 	font-family:'Myriad',Arial;
 }
 .backmenu{
@@ -78,7 +78,7 @@ ul.menu li a{
     font-size:13px;
     -webkit-box-shadow: 0 1px 3px #555;
 }
-ul.menu li a:active{
+ul.menu li a.ativa{
     background:#7E7E7E url(../images/bgMenu2.png) repeat-x top left;
     color:#110;
 	text-shadow: 0 1px 1px #EEE;
@@ -93,12 +93,24 @@ ul.menu li span{
     top:80px;
     cursor:pointer;
 }
-.container{
+.containerViewer{
 	margin: 3px 0px;
+}
+.container{
+	width:550px;
+	height:500px;
+	margin: auto;
 }
 .container2{
 	margin: 3px 0px;
 	height:450px;
+	width:550px;
+	margin: auto;
+}
+.containerhelp{
+	margin: 3px 0px;
+	width:550px;
+	margin: auto;
 }
 .mensagens{
 	padding:2px;
@@ -207,8 +219,6 @@ ul.menu li span{
 	height:362px;
 }
 .help{
-	height:460px;
-	overflow-y:scroll;
 	margin: 3px 0px 17px 0px;
 }
 .help .item  ul{

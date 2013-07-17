@@ -13,6 +13,9 @@
 .i{
 	font-family:'MyriadI',Arial;
 }
+.b{
+	font-family:'MyriadB',Arial;
+}
 h1, h2, h3, h4, h5, h6{
 	font-family:'MyriadB',Arial;
 }
@@ -366,4 +369,10 @@ a[href='#topo']{
 	font-size:14px;
 	text-decoration:underline;
 	margin-left:30px;
+}
+#loadcenter{
+	text-align:center;
+}
+#loadcenter img{
+	margin-left:225px;
 }
