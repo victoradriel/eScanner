@@ -1,7 +1,7 @@
 ﻿{
 	"manifest_version": 2,
 	"name": "eScanner",
-	"version": "2.3",
+	"version": "2.4",
 	"description": "Verifica a acessibilidade de uma página WEB segundo as recomendações do Modelo de Acessibilidade de Governo Eletrônico - e-MAG (3.0)",
 	
 	"icons": { "16": "images/icon.png",

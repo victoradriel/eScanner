@@ -7,19 +7,19 @@
  */
 
 (function(){
-	$("div.resanalise").hide();
 	redisplay();
 
 	try{ gerartree(localStorage['jsonCode']); }
 	catch(err){ $("#chart").html("<center><h3>Não foi possível gerar a representação do código em árvore.</h3></center>"); }
+	
 	$(".code").text(localStorage['htmlCode']);
 	$("#pagName a").text(localStorage['pageName']).attr("href",localStorage['pageName']);
 	var erros = JSON.parse(localStorage['errosArray']);
-	var lineHeight = 19;
 	
-	// Marca ocorrências
+	// Marca ocorrências //////////////////////////////////////////////////////////////////////////////////////////////////////
+	var lineHeight = 19; 	//Altura das linhas e largura da marcação do erro no código
 	for ( var i = 1; i < erros.length; i++ ){								
-		if((erros[i].tipo == 0)&&(erros[i].ocorrencia > 0)){
+		if((erros[i].tipo == 0)&&(erros[i].ocorrencia > 0)&&(i != 4)&&(i != 8)){
 			// Transforma string e deixa apenas numeros e virgulas
 			var from = erros[i].linha.indexOf(":");
 			var to = erros[i].linha.indexOf(".");
@@ -37,12 +37,37 @@
 			}
 		}
 	}
+	// Marca interrupção da análise
+	if(erros[0].ocorrencia){
+		$(".code").prepend("<div class='boxlinha' style='margin-top:"+ (erros[0].linha-2)*lineHeight +"px; background:#000; text-align:center;'>A análise foi interrompida na linha abaixo! Verifique a linha "+ erros[0].linha +" do teu código.</div>");
+	}
 	
-	// Exibindo resultado da análise	
+	// Exibir e/ou esconder descrição do erro na linha marcada
+	$(".code").find(".boxlinha span").hide();
+	$(".code").find(".boxlinha").mouseover(function(){
+		var off = $(this).offset();
+		if(off.top <= 95) $(this).find("span").css("margin-top","19px").show();
+		else $(this).find("span").css("margin-top","-19px").show();
+	}).mouseleave(function(){
+		$(this).find("span").hide();
+	});
+	
+	// Adiciona sombra à caixa com o código quando o scroll é modificado
+	$(".mensagens .code").scroll(function(){
+		var position = $(".mensagens .code").find(".boxlinha").position();
+		if(position.top < -15){ 
+			$(".mensagens .code").css("box-shadow","inset -10px 0px 10px #000000");
+		}
+		else{ 
+			$(".mensagens .code").css("box-shadow","none");
+		}
+	});
+	
+	// Exibe resultado prévio da análise //////////////////////////////////////////////////////////////////////////////////////	
+	var contEr = 0, contAl=0;
 	$(".mensagens .resanalise").css("overflow-y","scroll");
 	$("#erros, #alertas").hide();
 	
-	var contEr = 0, contAl=0;
 	for ( var i = 1; i < erros.length; i++ ){
 		if((erros[i].tipo == 0)&&(erros[i].ocorrencia > 0)){
 			contEr++;
@@ -55,6 +80,7 @@
 		}
 	}
 	
+	// Atualizar menu com quantidades de alertas e erros
 	if(contEr == 1) $("#resumo ul li a:first").html(contEr + " erro");
 	else $("#resumo ul li a:first").html(contEr + " erros");
 	
@@ -65,6 +91,7 @@
 	if (contAl > 0) $("#alertas").show();
 	$(".detalhes").hide();
 	
+	// Exibir e/ou esconder detalhes da mensagem
 	$(".grupoErros a, .grupoAlertas a").toggle(
 		function(){
 			$(this).parent().find(".detalhes").slideDown();
@@ -76,16 +103,7 @@
 		}
 	);
 	
-	// Exibir/esconder descrição do erro na linha
-	$(".code").find(".boxlinha span").hide();
-	$(".code").find(".boxlinha").mouseover(function(){
-		var off = $(this).offset();
-		if(off.top <= 95) $(this).find("span").css("margin-top","19px").show();
-		else $(this).find("span").css("margin-top","-19px").show();
-	}).mouseleave(function(){
-		$(this).find("span").hide();
-	});
-
+	// Gerar visualização do código em forma de árvore radial /////////////////////////////////////////////////////////////////
 	function gerartree(jsontext){			
 		var treeHeight = $("div.json").height();
 		var treeWidth = $("div.json").width();
@@ -151,6 +169,7 @@
 			.text(function(d) { return d.name; });
 	}
 	
+	// Menu de exibição da árvore e das mensagens (erros e alertas) ///////////////////////////////////////////////////////////
 	$("a.treecode").click(function(){
 		if(localStorage['viewCode'] == 1){
 			localStorage['viewCode'] = 0;
@@ -171,23 +190,40 @@
 		}
 	});
 	
+	// Ajusta dimensões estáticas e mantém opções do usuário
 	function redisplay(){		
 		if(localStorage['viewCode'] == 0){
 			$(".code").css("width","98%");
 			$("div.json, div.resanalise").hide();
 			$(".treec, .infoc").removeClass("ativo");
+			$(".treecode").css("background","url(../images/ctreeoff.png) no-repeat 50% 80%");
+			$(".infocode").css("background","url(../images/cremoveoff.png) no-repeat 50% 80%");
 		}else if(localStorage['viewCode'] == 1){
 			$(".code").css("width","49%");
 			$("div.resanalise").hide();
 			$("div.json").show();
 			$(".infoc").removeClass("ativo");
 			$(".treec").addClass("ativo");
+			$(".treecode").css("background","url(../images/ctree.png) no-repeat 50% 80%");
+			$(".infocode").css("background","url(../images/cremoveoff.png) no-repeat 50% 80%");
 		}else{
 			$(".code").css("width","69%");
 			$("div.json").hide();
 			$("div.resanalise").show();
 			$(".treec").removeClass("ativo");
 			$(".infoc").addClass("ativo");
+			$(".treecode").css("background","url(../images/ctreeoff.png) no-repeat 50% 80%");
+			$(".infocode").css("background","url(../images/cremove.png) no-repeat 50% 80%");
+		}
+		$(".infoc").show();
+		
+		var tam = $("body").width();
+		if(tam < 1050){
+			$(".infoc").css("opacity","0.3");
+			if(localStorage['viewCode'] == 2){
+				$("div.resanalise").hide();
+				$(".code").css("width","98%");	
+			}
 		}
 	}
 	
@@ -212,15 +248,5 @@
 	
 	$(window).resize(function(){
 		window.location.reload();
-	});
-	
-	$(".mensagens .code").scroll(function(){
-		var position = $(".mensagens .code").find(".boxlinha").position();
-		if(position.top < -15){ 
-			$(".mensagens .code").css("box-shadow","inset -10px 0px 10px #000000");
-		}
-		else{ 
-			$(".mensagens .code").css("box-shadow","none");
-		}
 	});
 })();

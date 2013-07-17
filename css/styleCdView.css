@@ -47,6 +47,7 @@ body{
 	margin:0px;
 	padding:0px;
 	height:100%;
+	min-width: 785px;
 	font-family:'Myriad',Arial;
 }
 .backmenu{
@@ -192,7 +193,7 @@ ul.menu li span{
 	background:#FFF3F3;
 }
 .grupoAlertas .detalhes{
-	background:#FFC;
+	background:#FFD;
 }
 .detalhes span{
 	font-size:13px;
@@ -448,6 +449,11 @@ a[href='#topo']{
 	position:absolute;
 	right: 90px;
 	top: 49px;
+	width: 67%;
+	height:20px;
+	text-align:right;
+	overflow-x:hidden;
+	overflow-y:hidden;
 }
 #menuView{
 	margin:7px 1% 0px 0px;
@@ -490,18 +496,18 @@ a[href='#topo']{
 	background:#7E7E7E url(../images/bgMenu2.png) repeat-x top left;
 }
 .treecode{
-	background:url(../images/ctreeoff.png) no-repeat 50% 90%;
+	background:url(../images/ctreeoff.png) no-repeat 50% 80%;
 }
 .infocode{
-	background:url(../images/cremoveoff.png) no-repeat 50% 90%;
+	background:url(../images/cremoveoff.png) no-repeat 50% 80%;
 }
 .treecode:focus,
 .treecode:hover{
-	background:url(../images/ctree.png) no-repeat 50% 90%;
+	background:url(../images/ctree.png) no-repeat 50% 80%;
 }
 .infocode:focus,
 .infocode:hover{
-	background:url(../images/cremove.png) no-repeat 50% 90%;
+	background:url(../images/cremove.png) no-repeat 50% 80%;
 }
 .ativo{
 	-webkit-box-shadow: 1px 1px 1px #555;
