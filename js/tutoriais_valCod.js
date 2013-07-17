@@ -2,7 +2,7 @@
  * @author Victor Adriel de J. Oliveira
  */
 
-(function(){	
+$().ready(function(){	
 	$(".links a#tuto_alt").click(function(){
 		chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/o-uso-correto-do-texto-alternativo'}, function(tab){ });
 	});

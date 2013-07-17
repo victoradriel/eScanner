@@ -25,15 +25,19 @@
 								<li><a href="#quando">Quando a análise falha</a></li>
 								<li><a href="#identificacao">Identificação de erros</a></li>
 								<li><a href="#emissao">Emissão de alertas</a></li>
+								<li><a href="#elementos">Elementos da tela principal</a></li>
+								<li><a href="#menuquant">Quantidade de erros e alertas</a></li>
 							</ul>
 						</div>
 						<div class="right">
-							<ul>
-								<li><a href="#elementos" class="bord">Elementos da página de exibição dos resultados</a></li>
-								<li><a href="#menuquant">Menu com as quantidades de erros e alertas</a></li>
-								<li><a href="#boxprincipal">Box principal</a></li>
-								<li><a href="#listas">Lista de erros e lista de alertas</a></li>
-								<li><a href="#telas">Demais telas</a></li>
+							<ul>								
+								<li><a href="#boxprincipal" class="bord">Box principal</a></li>
+								<li><a href="#listas">Listas de erros e alertas</a></li>
+								<li><a href="#verCodigo">Ver código-fonte</a></li>
+								<li><a href="#areaCodigo">Área do código</a></li>
+								<li><a href="#errosCodigo">Erros e alertas no revisor de código</a></li>
+								<li><a href="#arvoreCodigo">Árvore radial</a></li>					
+								<li><a href="#telas">Demais telas</a></li>								
 							</ul>
 						</div>
 					</div>
@@ -97,19 +101,20 @@
 					<img src="../images/help/alertas.png" alt="Relação de alertas" title="Imagem da relação de alertas" style="margin-left:50px" class="shad"/><br/>
 					<span class="legimg i"  style="margin-left:50px">Fragmento da lista de alertas, exibidos em amarelo.</span>
 
-					<a href="#topo">voltar ao menu</a>
+					<a href="#topo">voltar ao menu</a>					
 					<div class="item tituloHelp" id="elementos" name="elementos">
-					<h3>Elementos da página de exibição dos resultados</h3>
+					<h3>Elementos da tela principal</h3>
 					</div>
 					<p>A página de exibição dos resultados é a tela principal do programa e é composta pelos seguintes elementos:
 					<br/>a) <a href="#menuquant">Menu com as quantidades de erros e alertas</a>: composto por âncoras de atalho direto para a lista de erros e para a lista de alertas;
 					<br/>b) <a href="#boxprincipal">Box principal</a>: apresenta mensagens sobre o status do processo de análise;
 					<br/>c) <a href="#listas">Lista de erros</a>: descrição dos erros detectados na página;
-					<br/>d) <a href="#listas">Lista de alertas</a>: descrição das recomendações que podem se aplicar à página.</p>
+					<br/>d) <a href="#listas">Lista de alertas</a>: descrição das recomendações que podem se aplicar à página;
+					<br/>d) <a href="#verCodigo">Ver código-fonte</a>: código-fonte da página analizada.</p>
 
 					<a href="#topo">voltar ao menu</a>
 					<div class="item tituloHelp" id="menuquant" name="menuquant">
-					<h3>Menu com as quantidades de erros e alertas</h3>
+					<h3>Quantidade de erros e alertas</h3>
 					</div>
 					<p>Além da quantidade de alertas e da quantidade de erros detectados na análise da página, o menu também serve como atalho para avançar direto às listas de erros e alertas.</p>
 					
@@ -131,7 +136,7 @@
 
 					<a href="#topo">voltar ao menu</a>
 					<div class="item tituloHelp" id="listas" name="listas">
-					<h3>Lista de erros e lista de alertas</h3>
+					<h3>Listas de erros e alertas</h3>
 					</div>
 					<p>A relação de erros contém uma descrição sintética do erro e a recomendação do e-MAG em que o erro se aplica. Da mesma forma, a relação dos alertas contém uma descrição sintética do alerta e a recomendação do e-MAG em que este se aplica.</p>
 					
@@ -142,6 +147,57 @@
 					<img src="../images/help/recsintetica.png" alt="Detalhes sobre um erro" title="Imagem dos detalhes sobre um erro" style="margin-left:50px"/><br/>
 					<span class="legimg i"  style="margin-left:50px">Os detalhes sobre um erro(e/ou alerta) são apresentados de forma sintética.</span>
 
+					<a href="#topo">voltar ao menu</a>					
+					<div class="item tituloHelp" id="verCodigo" name="verCodigo">
+					<h3>Ver código-fonte</h3>
+					</div>
+					<p>Ao clicar no link "Ver código-fonte", uma nova aba é aberta no navegador onde o código-fonte da página analizada pode ser visualizado.</p>
+
+					<img src="../images/help/vercod.png" alt="Âncora para visualização de código" title="Imagem da âncora para visualização de código" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Em destaque, âncora para a página de revisão do código analizado.</span><br/><br/>
+
+					<img src="../images/help/revisorcod.png" alt="Revisor de Código-fonte" title="Imagem do revisor de código-fonte" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Página de revisão do código-fonte aberta em nova aba.</span><br/><br/>
+					
+					<p>A página de revisão do código-fonte é composta pelos seguintes elementos:
+					<br/>a) <a href="#areaCodigo">Área do código</a>: contém o código-fonte da página analizada;
+					<br/>b) <a href="#errosCodigo">Relação de erros e alertas</a>: contém as descrições dos erros e alertas, assim como exibido na tela principal do programa;
+					<br/>c) <a href="#arvoreCodigo">Árvore radial</a>: visualização do código em formato de árvore, na qual os nós representam as etiquetas HTML e estão distribuídos radialmente em relação à raiz.</p>
+					
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="areaCodigo" name="areaCodigo">
+					<h3>Área do código</h3>
+					</div>
+					<p>Ao abrir a tela de revisão do código-fonte, é possível visualizar o código na região mais a esquerda. Nessa área é exibido o código assim como no arquivo fonte, a numeração das linhas e também marcações em vermelho indicando a linha em que foram identificados erros.</p>
+
+					<img src="../images/help/areacod.png" alt="Área do código" title="Imagem da área do código" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Em destaque, área de exibição do código-fonte da página analizada.</span><br/><br/>
+
+					<p>Ao passar o cursor sobre a linha marcada, é exibida uma relação dos erros encontrados na linha e quantas vezes esse erro ocorre nesta mesma linha.</p>
+
+					<img src="../images/help/marcacod.png" alt="Relação de erros na linha" title="Imagem da relação de erros na linha marcada" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Descrição de erros e quantidade de ocorrências do erro na linha marcada.</span>
+					
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="errosCodigo" name="errosCodigo">
+					<h3>Erros e alertas no revisor de código</h3>
+					</div>
+					<p>Na página de revisão do código-fonte, as mensagens de erro e alerta são exibidas assim como na tela principal do eScanner. Na lista de erros é possível ainda clicar nos números das linhas onde os erros foram encontrados para visualizar rapidamente no código-fonte ao lado. Caso seja necessário, é possível desativar a visualização da lista de erros clicando no botão correpondente no menu superior direito da tela.</p>
+
+					<img src="../images/help/areaerros.png" alt="Relação de erros na página" title="Imagem da relação de erros na página" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Em destaque, relação de erros e alertas com âncoras para as linhas afetadas.</span>
+					
+					<a href="#topo">voltar ao menu</a>
+					<div class="item tituloHelp" id="arvoreCodigo" name="arvoreCodigo">
+					<h3>Árvore radial</h3>
+					</div>
+					<p>Na página de revisão do código-fonte é possível ativar a visualização do código em formato de uma árvore radial. Essa visualização se torna visível clicando no botão correpondente no menu superior direito da tela.</p>
+
+					<img src="../images/help/areaarvore.png" alt="Árvore radial" title="Imagem da área da árvore radial" style="margin-left:50px" class="shad"/><br/>
+					<span class="legimg i"  style="margin-left:50px">Em destaque, visualização do código em forma de uma árvore radial.</span><br/><br/>
+
+					<p>Na árvore, cada nó corresponde a um elemento do código HTML e os elementos onde existem erros são preenchidos em vermelho. Na árvore, é possível clicar nos nós vermelhos como atalho para a linha correspondente no código-fonte ao lado. </p>
+					
 					<a href="#topo">voltar ao menu</a>
 					<div class="item tituloHelp" id="telas" name="telas">
 					<h3>Demais telas</h3>
@@ -155,8 +211,8 @@
 					<br/><br/>* Ajuda
 					<br/>Nesta tela constam informações sobre a extensão e sobre sua utilização.</p>
 					
-					<a href="#topo">voltar ao menu</a>
-				</div>				
+					<a href="#topo">voltar ao menu</a>					
+				</div>	
 			</div>
 		</div>
     </body>

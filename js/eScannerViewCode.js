@@ -6,7 +6,7 @@
  * @author Victor Adriel de J. Oliveira
  */
 
-(function(){
+$().ready(function(){
 	redisplay();
 
 	try{ gerartree(localStorage['jsonCode']); }
@@ -71,17 +71,20 @@
 		}
 	}
 	
-	// Adiciona sombra à caixa com o código quando o scroll é modificado
+
 	$(".mensagens .code").scroll(function(){
-		var position = $(".mensagens .code").find(".boxlinha").position();
-		if(position.top < -15){ 
-			$(".mensagens .code").css("box-shadow","inset -10px 0px 10px #000000");
+		// Adiciona sombra à caixa com o código quando o scroll é modificado
+		if($(this).scrollTop() > 5){
+			if($(this).scrollLeft() > 5) $(".mensagens .code").css("box-shadow","inset 0px 0px 10px #000000");
+			else $(".mensagens .code").css("box-shadow","inset -10px 0px 10px #000000");
 		}
-		else{ 
-			$(".mensagens .code").css("box-shadow","none");
-		}
+		else if($(this).scrollLeft() > 5) $(".mensagens .code").css("box-shadow","inset 0px -10px 10px #000000");
+		else $(".mensagens .code").css("box-shadow","none");
+
+		// Mantem marcação apesar do scroll em x
+		$(".boxlinha").css({ 'left': $(this).scrollLeft() });
 	});
-	
+
 	// Marca ocorrência de interrupção da análise
 	if(erros[0].ocorrencia){
 		$(".code").prepend("<div class='boxlinha' style='margin-top:"+ (erros[0].linha-2)*lineHeight +"px; background:#000; text-align:center;'>A análise foi interrompida na linha abaixo! Verifique a linha "+ erros[0].linha +" do teu código.</div>");
@@ -315,7 +318,7 @@
 		}
 		return codeNum;
 	}
-	
+
 	$(window).resize(function(){
 		window.location.reload();
 	});

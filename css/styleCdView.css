@@ -274,13 +274,13 @@ a.bord{
     -webkit-border-bottom-left-radius: 5px;
 }
 .right{
-	width:340px;
-	margin-left:170px;
+	width:270px;
+	margin-left:240px;
 	-webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
 }
 .left{
-	width:170px;
+	width:240px;
 	float:left;
 	border-right:1px solid #EEE;
     -webkit-border-top-left-radius: 5px;
@@ -405,7 +405,7 @@ a[href='#topo']{
 	height:85%;
 	margin:46px 50% 10px 1%;
 	white-space: pre;
-	overflow-x: hidden;
+	overflow-x: scroll;
 	overflow-y: scroll;
 	background-color:#f0f0f0;
 	line-height:19px;
