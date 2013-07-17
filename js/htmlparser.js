@@ -108,7 +108,7 @@
 	firstCtag = 1;
 	var HTMLParser = this.HTMLParser = function( html, handler ) {
 
-		var index, chars, match, stack = [], last = html;
+		var index, chars, match, stack = [], last = html, errbool = 0, errlin = -1;
 
 		// Total de linhas do código HTML
 		var htmlaux = html.split("\n");
@@ -227,17 +227,7 @@
 
 			unary = empty[ tagName ] || !!unary;
 
-			if ( !unary ){
-				stack.push( tagName );
-				
-				// Prototipo para gerar versão JSON do código ////////////////////// ///////////////////
-				if(first){ mens[55].detalhe += '{ "name" : "'+ tagName +'" '; first = 0; firstCtag = 1;}
-				else{ mens[55].detalhe += ', "children": [ { "name" : "'+ tagName +'" ';}
-				//////////////////////////////////////////////////////////////////// ///////////////////
-			}
-			else{
-				mens[55].detalhe += '{ "name" : "'+ tagName +'" }, ';
-			}
+			if ( !unary ){ stack.push( tagName ); }
 
 			// Sinaliza a presença de um elemento do tipo imagem (type="image")
 			arrFlag[9]=0;
@@ -263,128 +253,128 @@
 
 				if(codErr[1]){
 					var occurrence = errorRow(rows,html);
-					mens[1].ocorrencia++;
+					mens[1].ocorrencia++; errbool = 1; errlin = occurrence;
 					mens[1].linha= mens[1].linha + occurrence + ", ";
 				}
 				else if(codErr[2]){
 					var occurrence = errorRow(rows,html);
-					mens[2].ocorrencia++;
+					mens[2].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[2].linha= mens[2].linha + occurrence + ", ";
 				}
 				else if(codErr[3]){
 					var occurrence = errorRow(rows,html);
-					mens[3].ocorrencia++;
+					mens[3].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[3].linha= mens[3].linha + occurrence + ", ";
 				}				
 				else if(codErr[5]){
 					var occurrence = errorRow(rows,html);
-					mens[5].ocorrencia++;
+					mens[5].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[5].linha= mens[5].linha + occurrence + ", ";
 				}
 				else if(codErr[6]){
 					var occurrence = errorRow(rows,html);
-					mens[6].ocorrencia++;
+					mens[6].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[6].linha= mens[6].linha + occurrence + ", ";
 				}
 				else if((tagName.toLowerCase() == "html")&&(!codErr[7])){
 					var occurrence = errorRow(rows,html);
-					mens[7].ocorrencia++;
+					mens[7].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[7].linha= mens[7].linha + occurrence + ", ";
 				}
 				else if(tagName.toLowerCase() == "img"){
 					if(!codErr[9]){					
 						var occurrence = errorRow(rows,html);
-						mens[9].ocorrencia++;
+						mens[9].ocorrencia++; errbool=1; errlin = occurrence;
 						mens[9].linha= mens[9].linha + occurrence + ", ";	
 					}
 					if(codErr[16]){
 						var occurrence = errorRow(rows,html);
-						mens[16].ocorrencia++;
+						mens[16].ocorrencia++; errbool=1; errlin = occurrence;
 						mens[16].linha= mens[16].linha + occurrence + ", ";
 					}
 				}
 				else if(tagName.toLowerCase() == "area"){
 					if(!codErr[9]){
 						var occurrence = errorRow(rows,html);
-						mens[9].ocorrencia++;
+						mens[9].ocorrencia++; errbool=1; errlin = occurrence;
 						mens[9].linha= mens[9].linha + occurrence + ", ";
 					}	
 					if(!codErr[10]){
 						var occurrence = errorRow(rows,html);
-						mens[10].ocorrencia++;
+						mens[10].ocorrencia++; errbool=1; errlin = occurrence;
 						mens[10].linha= mens[10].linha + occurrence + ", ";
 					}
 					if(codErr[16]){
 						var occurrence = errorRow(rows,html);
-						mens[16].ocorrencia++;
+						mens[16].ocorrencia++; errbool=1; errlin = occurrence;
 						mens[16].linha= mens[16].linha + occurrence + ", ";
 					}					
 				}	
 				else if(arrFlag[9] == 1){
 					if(!codErr[9]){
 						var occurrence = errorRow(rows,html);
-						mens[9].ocorrencia++;
+						mens[9].ocorrencia++; errbool=1; errlin = occurrence;
 						mens[9].linha= mens[9].linha + occurrence + ", ";	
 					}
 					if(codErr[16]){
 						var occurrence = errorRow(rows,html);
-						mens[16].ocorrencia++;
+						mens[16].ocorrencia++; errbool=1; errlin = occurrence;
 						mens[16].linha= mens[16].linha + occurrence + ", ";
 					}
 				}				
 				else if(codErr[11]){
 					var occurrence = arrFlag[13];
-					mens[11].ocorrencia++;
+					mens[11].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[11].linha= mens[11].linha + occurrence + ", ";
 				}
 				else if(codErr[12]){
 					var occurrence = errorRow(rows,html);
-					mens[12].ocorrencia++;
+					mens[12].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[12].linha= mens[12].linha + occurrence + ", ";
 				}
 				else if(codErr[13]){
 					var occurrence = errorRow(rows,html);
-					mens[13].ocorrencia++;
+					mens[13].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[13].linha= mens[13].linha + occurrence + ", ";
 				}
 				else if(codErr[14]){
 					var occurrence = errorRow(rows,html);
-					mens[14].ocorrencia++;
+					mens[14].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[14].linha= mens[14].linha + occurrence + ", ";
 				}
 				else if(codErr[15]){
 					var occurrence = errorRow(rows,html);
-					mens[15].ocorrencia++;
+					mens[15].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[15].linha= mens[15].linha + occurrence + ", ";
 				}
 				else if(codErr[17]){
 					var occurrence = errorRow(rows,html);
-					mens[17].ocorrencia++;
+					mens[17].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[17].linha= mens[17].linha + occurrence + ", ";
 				}
 				else if((tagName.toLowerCase() == "table")&&(!codErr[18])){
 					var occurrence = errorRow(rows,html);
-					mens[18].ocorrencia++;
+					mens[18].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[18].linha= mens[18].linha + occurrence + ", ";
 				}
 				else if(codErr[19]){
 					var occurrence = errorRow(rows,html);
-					mens[19].ocorrencia++;
+					mens[19].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[19].linha= mens[19].linha + occurrence + ", ";
 				}
 				else if(codErr[20]){
 					var occurrence = arrFlag[11];
-					mens[20].ocorrencia++;
+					mens[20].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[20].linha= mens[20].linha + occurrence + ", ";
 				}
 				else if(codErr[21]){
 					var occurrence = errorRow(rows,html);
-					mens[21].ocorrencia++;
+					mens[21].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[21].linha= mens[21].linha + occurrence + ", ";
 				}
 				else if(codErr[22]){
 					var occurrence = arrFlag[12];
-					mens[22].ocorrencia++;
+					mens[22].ocorrencia++; errbool=1; errlin = occurrence;
 					mens[22].linha= mens[22].linha + occurrence + ", ";
 				}
 
@@ -395,6 +385,27 @@
 				// Salva a ocorrência do erro 8 antes de reinicializar o vetor
 				var aux = codErr[8]; 
 				
+				// Prototipo para gerar versão JSON do código ////////////////////// ///////////////////
+				if ( !unary ){					
+					if(first){ 
+						mens[55].detalhe += '{ "name" : "'+ tagName +'" , "error" : "'+ errbool +'" , "row" : "'+ errlin +'" ';
+						first = 0; 
+						firstCtag = 1;
+					} else { 
+						mens[55].detalhe += ', "children": [ { "name" : "'+ tagName +'" , "error" : "'+ errbool +'" , "row" : "'+ errlin +'" ';
+					}					
+				} else {
+					if(first){ 
+						mens[55].detalhe += '{ "name" : "'+ tagName +'" , "error" : "'+ errbool +'" , "row" : "'+ errlin +'" }, ';
+					} else { 						
+						mens[55].detalhe += ', "children": [ { "name" : "'+ tagName +'" , "error" : "'+ errbool +'" , "row" : "'+ errlin +'" }, ';
+						firstCtag = 0; first = 1;
+					}
+				}
+				errbool = 0;
+				errlin = -1;
+				//////////////////////////////////////////////////////////////////// ///////////////////
+			
 				codErr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 				codErr[8] = aux;
 				

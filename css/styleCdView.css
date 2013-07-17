@@ -13,6 +13,9 @@
 .i{
 	font-family:'MyriadI',Arial;
 }
+.b{
+	font-family:'MyriadB',Arial;
+}
 h1, h2, h3, h4, h5, h6{
 	font-family:'MyriadB',Arial;
 }
@@ -33,23 +36,19 @@ a{
 body{
 	margin:0px;
 	padding:0px;
+	overflow-x:hidden;
 }
 #all{
 	margin:0px;
 	padding:0px;
-	width:550px;
-	height:500px;
+	height:100%;
 	background-color:#f0f0f0;
 	font-family:'Myriad',Arial;
-	-webkit-border-top-right-radius: 6px;
-    -webkit-border-top-left-radius: 6px;
 }
 .backmenu{
     background:#7E7E7E url(../images/bgMenu.png) repeat-x top left;
     text-shadow: 0 1px 1px #fff;
     -webkit-box-shadow: 0 1px 3px #555;
-	 -webkit-border-top-right-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
 	border-top:1px solid #bebebe;
 	height:30px;
 }
@@ -79,7 +78,7 @@ ul.menu li a{
     font-size:13px;
     -webkit-box-shadow: 0 1px 3px #555;
 }
-ul.menu li a.ativa{
+ul.menu li a:active{
     background:#7E7E7E url(../images/bgMenu2.png) repeat-x top left;
     color:#110;
 	text-shadow: 0 1px 1px #EEE;
@@ -96,7 +95,6 @@ ul.menu li span{
 }
 .container{
 	margin: 3px 0px;
-	height:460px;
 }
 .container2{
 	margin: 3px 0px;
@@ -104,7 +102,6 @@ ul.menu li span{
 }
 .mensagens{
 	padding:2px;
-	float:left;
 }
 .mensagens a{
 	text-decoration:none;
@@ -366,4 +363,55 @@ a[href='#topo']{
 	font-size:14px;
 	text-decoration:underline;
 	margin-left:30px;
+}
+.mensagens .code{
+	clear:both;
+	position:absolute;
+	min-width:380px;
+	width:48%;
+	height:85%;
+	margin:46px 0px 10px 20px;
+	white-space: pre;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	background-color:#f0f0f0;
+	line-height:19px;
+}
+.mensagens .json{
+	float:right;
+	margin:0px 20px 0px 0px;
+	min-width:380px;
+	width:47%;
+	height:85%;
+	padding:0px;
+}
+.boxlinha{
+	background-color:rgba(255, 0, 0, 0.3);
+	color:#FFF;
+	width:100%;
+	height:1.2em;
+	position:absolute;
+}
+.boxlinha span{
+	background-color:#000;
+	float:left;
+	width:inherit;
+	padding-left:20px;
+}
+.boxlinhaflash{
+	opacity:0.7;
+	background-color:#FF0;
+	color:#FF0;
+	width:100%;
+	height:1.2em;
+	position:absolute;
+}
+#pagName{
+	margin:13px 20px 0px 0px;
+	float:right;
+}
+#pagName a{
+	padding-top:20px;
+	text-decoration:underline;
+	color:#999;
 }

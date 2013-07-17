@@ -18,8 +18,8 @@
 					<div id="titulo">
 						<h2>Resultado do Escaneamento</h2>
 					</div>
-					<div id="resumo">
-						<ul>
+					<div id="resumo">						
+						<ul>							
 							<li><a href="#erros">0 erros</a></li>
 							<li><a href="#alertas">0 alertas</a></li>
 						</ul>
@@ -31,9 +31,7 @@
 						<p>Analisando página atual</p></center>
 					</div>
 					
-					<div class="item json">
-						<div id="chart"></div>
-					</div>
+					<a id="newTab">Ver código-fonte</a>
 					
 					<div class="item tituloEr" id="erros" name="erros">
 						<h3>Erros</h3>	
@@ -50,22 +48,32 @@
 		
 		<script type="text/javascript" src="js/jquery-1.3.2.js"></script>
 		<script src="js/htmlparser.js"></script>
-		<script type="text/javascript" src="d3.v2.js"></script>
-		<link type="text/css" rel="stylesheet" href="tree.css"/>
+		<script type="text/javascript" src="js/d3.v2.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/tree.css"/>
         <script type="text/javascript">
 			var xmlhttp = new XMLHttpRequest();
 			var erros = new Array();
-			var html, contEr = 0, contAl = 0,success = 0;
+			var html, contEr = 0, contAl = 0,success = 0, addPage = "";
+			
+			$('#newTab').click(function(){
+				chrome.tabs.create({'url': chrome.extension.getURL('reviewCodeSource/viewCode.html')}, function(tab) {
+					localStorage['pageName'] = addPage;
+					localStorage['htmlCode'] = html;
+					localStorage['jsonCode'] = erros[55].detalhe;
+					localStorage['errosArray'] = JSON.stringify(erros);
+				});
+			});
 			
 			$(".container").css("overflow-y","scroll");
 			$("#resumo ul, #erros, #alertas").hide();
 			
 			function formataLinhas(ocorrencia, linha){
-			
+				// Substitui ultima virgula por ponto
 				var num = linha.lastIndexOf(",");
 				linha = linha.slice(0,num).concat(".");
 				
 				if(ocorrencia > 1){
+					// Substitui penultima virgula pela conunção 'e'
 					num = linha.lastIndexOf(",");
 					num2 = linha.lastIndexOf(".");
 					st = linha.slice(0,num).concat(" e");
@@ -79,7 +87,7 @@
 			}
 			
 			function alteraURL(url){
-			
+				addPage = url;
 				xmlhttp.open("POST", url, true);
 				
 				xmlhttp.onreadystatechange = function(){

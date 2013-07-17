@@ -1,0 +1,70 @@
+<!DOCTYPE>
+<html lang="pt-br">
+    <head><title>eScanner</title><link rel="stylesheet" href="../css/styleCdView.css" type="text/css" charset="utf-8"/></head>
+    <body>
+		<div id="all">
+			<div class="backmenu">
+				<div class="navigation">
+					<ul class="menu" id="menu">
+						<li><a href="viewCode.html">Ver Código</a></li>
+						<li><a href="sobre_emag.html">Sobre o e-MAG</a></li>
+						<li><a class="ativa" href="tutoriais.html">Tutoriais</a></li>
+						<li><a href="ajuda.html">Ajuda</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="container">
+				<div class="text scroll">
+					<h2>Validadores automáticos de acessibilidade</h2>
+					<p>ASES (WCAG e e-MAG): </p>
+					<p>http://www.governoeletronico.gov.br/acoes-e-projetos/e-MAG/material-de-apoio</p><br/>
+					<p>Da Silva (WAI e e-MAG): </p>
+					<p>http://www.acessobrasil.org.br</p><br/>
+					<p>Cynthia Says (WAI): </p>
+					<p>http://www.cynthiasays.com</p><br/>
+					<p>Hera (WAI): </p>
+					<p>http://www.sidar.org/hera/</p><br/>
+					<p>Lift (WAI): </p>
+					<p>http://www.usablenet.com</p><br/>
+					<p>TAW (WAI): </p>
+					<p>http://www.tawdis.net</p><br/>
+					<p>eExaminator (WCAG 1.0): </p>
+					<p>http://www.acesso.umic.pt/examinator.php</p><br/>
+					<p>Functional Accessibility Evaluator 1.1: </p>
+					<p>http://fae.cita.uiuc.edu/</p>
+				</div>
+				<div class="links">
+					<a href="tutoriais_valCod.html">
+						<div class="item">
+							<div class="img val"></div>
+							<h4>Validadores de código</h4>
+							<p>Validadores de (X)HTML, CSS e de links.</p>
+						</div>
+					</a>
+					<a href="tutoriais.html">
+						<div class="item">
+							<div class="img pdf"></div>
+							<h4>Tutoriais</h4>
+							<p>Material de apoio.</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.3.2.js"></script>
+        <script type="text/javascript">
+			$(".links a#tuto_alt").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/o-uso-correto-do-texto-alternativo'}, function(tab){ });
+			});
+			$(".links a#tuto_table").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/tabelas-acessiveis'}, function(tab){ });
+			});
+			$(".links a#tuto_form").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/formularios-acessiveis'}, function(tab){ });
+			});
+        </script>
+		<noscript>
+			<p>O JavaScript não está funcionando, você pode ter problemas ao utilizar esta página.</p>
+		</noscript>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE>
+<html lang="pt-br">
+    <head><title>eScanner</title><link rel="stylesheet" href="../css/styleCdView.css" type="text/css" charset="utf-8"/></head>
+    <body>
+		<div id="all">
+			<div class="backmenu">
+				<div class="navigation">
+					<ul class="menu" id="menu">
+						<li><a href="viewCode.html">Ver Código</a></li>
+						<li><a class="ativa" href="sobre_emag.html">Sobre o e-MAG</a></li>
+						<li><a href="tutoriais.html">Tutoriais</a></li>
+						<li><a href="ajuda.html">Ajuda</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="container">
+				<div class="text">
+					<h2>Sobre o e-MAG</h2>
+					<p>Sua primeira versão, elaborada pelo Departamento de Governo Eletrônico em parceria com a ONG Acessibilidade Brasil, foi criada 
+					com o intuito de facilitar o acesso de todas as pessoas às informações e serviços disponibilizados nos sítios e portais do governo. 
+					Em 2007 a observância do e-MAG tornou-se obrigatória nos sítios e portais do governo brasileiro.</p>
+
+					<p>Para a elaboração da versão 2.0 foi realizado um estudo das regras de acessibilidade através de um método comparativo entre as 
+					normas adotadas por diversos países. Também foi realizada uma análise detalhada das regras e pontos de verificação do órgão internacional 
+					WAI/W3C, presentes na WCAG 1.0. O e-MAG está em sua terceira versão.</p>
+					<br/><br/><br/><br/><br/>
+				</div>
+				<div class="links">
+					<a href="http://www.governoeletronico.gov.br/biblioteca/arquivos/e-mag-3.0/download">
+						<div class="item">
+							<div class="img pdf"></div>
+							<h4>Modelo de Acessibilidade em Governo Eletrônico</h4>
+							<p>Versão 3.0, lançada em agosto de 2011.</p>
+						</div>
+					</a>
+					<a href="http://www.governoeletronico.gov.br/acoes-e-projetos/e-MAG">
+						<div class="item">
+							<div class="img site"></div>
+							<h4>Portal de Governo Eletrônico do Brasil</h4>
+							<p>Página do e-MAG no sítio do Governo Eletrônico.</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.3.2.js"></script>
+        <script type="text/javascript">
+			$(".links a:first").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/e-mag-3.0/download'}, function(tab){ });
+			});
+			$(".links a:last").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/acoes-e-projetos/e-MAG'}, function(tab){ });
+			});
+        </script>
+		<noscript>
+			<p>O JavaScript não está funcionando, você pode ter problemas ao utilizar esta página.</p>
+		</noscript>
+    </body>
+</html>
