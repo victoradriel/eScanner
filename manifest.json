@@ -1,0 +1,17 @@
+﻿{
+  "name": "eScanner",
+  "version": "1.0",
+  "description": "Verifica rapidamente a acessibilidade de uma página WEB segundo as recomendações do e-MAG v.3.0, o modelo de acessibilidade do governo eletrônico.",
+  "icons": { "16": "images/icon.png",
+           "48": "images/logo.png",
+          "128": "images/logo.png" },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+	"tabs"
+  ]
+}

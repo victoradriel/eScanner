@@ -1,0 +1,54 @@
+<!DOCTYPE>
+<html>
+    <head><link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8"/></head>
+    <body>
+		<div id="all">
+			<div class="backmenu">
+				<div class="navigation">
+					<ul class="menu" id="menu">
+						<li><a href="popup.html">Resultados</a></li>
+						<li><a href="sobre_emag.html">Sobre o e-MAG</a></li>
+						<li><a class="ativa" href="tutoriais.html">Tutoriais</a></li>
+						<li><a href="ajuda.html">Ajuda</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="container">
+				<div class="text">
+					<h2>Validadores de código</h2>
+					<p>Validador (X)HTML:</p><p>http://validator.w3.org</p><br/>
+					<p>Validador CSS:</p><p>http://jigsaw.w3.org/css-validator</p><br/>
+					<p>Validador de links:</p><p>http://validator.w3.org/checklink</p> 
+				</div>
+				<div class="links">
+					<a href="tutoriais.html">
+						<div class="item">
+							<div class="img pdf"></div>
+							<h4>Tutoriais</h4>
+							<p>Material de apoio.</p>
+						</div>
+					</a>
+					<a href="tutoriais_valAcs.html">
+						<div class="item">
+							<div class="img val"></div>
+							<h4>Validadores automáticos de acessibilidade</h4>
+							<p>Validadores W3C e e-MAG.</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+        <script type="text/javascript">
+			$(".links a#tuto_alt").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/o-uso-correto-do-texto-alternativo'}, function(tab){ });
+			});
+			$(".links a#tuto_table").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/tabelas-acessiveis'}, function(tab){ });
+			});
+			$(".links a#tuto_form").click(function(){
+				chrome.tabs.create({'url': 'http://www.governoeletronico.gov.br/biblioteca/arquivos/formularios-acessiveis'}, function(tab){ });
+			});
+        </script>
+    </body>
+</html>
