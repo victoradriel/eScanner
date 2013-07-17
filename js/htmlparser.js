@@ -8,7 +8,7 @@
  * Código original de Erik Arvidsson, Mozilla Public License
  * http://erik.eae.net/simplehtmlparser/simplehtmlparser.js
  *
- * @author Victor Adriel 
+ * @author Victor Adriel de J. Oliveira
  */
 
 (function(){

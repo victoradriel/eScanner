@@ -3,6 +3,10 @@
 	src: url('../font/MyriadPro-Regular.otf');
 }
 @font-face {
+	font-family: 'CodeFont';
+	src: url('../font/SLC_.ttf');
+}
+@font-face {
 	font-family: 'MyriadB';
 	src: url('../font/MyriadPro-Semibold.otf');
 }
@@ -121,7 +125,7 @@ ul.menu li span{
 }
 .mensagens .item{
 	clear:both;
-	width:500px;
+	width:92%;
 	height:auto;
 	background:#ffffff;
 	margin:2px 0px 10px 14px;
@@ -152,19 +156,23 @@ ul.menu li span{
 	margin:21px 0px -5px 14px;
 	background:#B00;
 	color:#FFF;
-	text-shadow: 1px 1px 1px #300;
+	box-shadow:none;
 }
 .mensagens .tituloAl{
 	margin:21px 0px -5px 14px;
 	background:#BB0;
 	color:#FFF;
-	text-shadow: 1px 1px 1px #000;
+	box-shadow:none;
 }
 .mensagens .erro{
 	background:#FDD;
+	box-shadow:none;
+	font-size:15px;
 }
 .mensagens .alerta{
-	background:#FFD;
+	background:#FFA;
+	box-shadow:none;
+	font-size:15px;
 }
 .mensagens .alerta a,
 .mensagens .erro a{
@@ -175,10 +183,16 @@ ul.menu li span{
 	background: url(../images/plus.png) no-repeat;
 }
 .detalhes{
-	background:#FFF;
+	background:#FFF3F3;
     -webkit-border-bottom-right-radius: 5px;
     -webkit-border-bottom-left-radius: 5px;
 	padding-top:5px;
+}
+.grupoErros .detalhes{
+	background:#FFF3F3;
+}
+.grupoAlertas .detalhes{
+	background:#FFC;
 }
 .detalhes span{
 	font-size:13px;
@@ -200,6 +214,7 @@ ul.menu li span{
 	font-size:13px;
 	text-decoration:none;
 	margin-top:15px;
+	margin-right:12px;
 	float:right;
 }
 #resumo li{
@@ -375,23 +390,34 @@ a[href='#topo']{
 	margin-left:30px;
 }
 .mensagens .code{
+	font-family:'CodeFont',Arial;
+	font-size:16px;
 	clear:both;
 	position:absolute;
 	min-width:380px;
-	width:48%;
+	width:49%;
 	height:85%;
-	margin:46px 0px 10px 20px;
+	margin:46px 50% 10px 1%;
 	white-space: pre;
-	overflow-x: scroll;
+	overflow-x: hidden;
 	overflow-y: scroll;
 	background-color:#f0f0f0;
 	line-height:19px;
+	
 }
 .mensagens .json{
 	float:right;
-	margin:0px 20px 0px 0px;
+	margin:0px 1% 0px 1%;
 	min-width:380px;
-	width:47%;
+	width:48%;
+	height:85%;
+	padding:0px;
+}
+.mensagens .resanalise{
+	float:right;
+	margin:0px 1% 0px 1%;
+	min-width:300px;
+	width:28%;
 	height:85%;
 	padding:0px;
 }
@@ -403,6 +429,8 @@ a[href='#topo']{
 	position:absolute;
 }
 .boxlinha span{
+	font-family:'Myriad',Arial;
+	font-size:15px;
 	background-color:#000;
 	float:left;
 	width:inherit;
@@ -417,11 +445,65 @@ a[href='#topo']{
 	position:absolute;
 }
 #pagName{
-	margin:13px 20px 0px 0px;
+	position:absolute;
+	right: 90px;
+	top: 49px;
+}
+#menuView{
+	margin:7px 1% 0px 0px;
+	float:right;
+	display:inline;
+	width:80px;
+}
+#menuView ul {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+#menuView ul li {
+	display:inline;
 	float:right;
 }
-#pagName a{
-	padding-top:20px;
+#pagName a,
+#menuView a{
+	padding-top:10px;
 	text-decoration:underline;
 	color:#999;
+	margin:0;
+}
+.button{
+	background:#FFF;
+	margin:0px 0px 0px 6px;
+	background:#7E7E7E url(../images/bgMenu.png) repeat-x top left;
+	-webkit-box-shadow: 2px 2px 3px #555;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+	padding:5px 0px 5px 0px;
+}
+.button a{
+	padding:0 15px 5px 15px;
+}
+.button:active{
+	-webkit-box-shadow: 1px 1px 1px #555;
+	background:#7E7E7E url(../images/bgMenu2.png) repeat-x top left;
+}
+.treecode{
+	background:url(../images/ctreeoff.png) no-repeat 50% 90%;
+}
+.infocode{
+	background:url(../images/cremoveoff.png) no-repeat 50% 90%;
+}
+.treecode:focus,
+.treecode:hover{
+	background:url(../images/ctree.png) no-repeat 50% 90%;
+}
+.infocode:focus,
+.infocode:hover{
+	background:url(../images/cremove.png) no-repeat 50% 90%;
+}
+.ativo{
+	-webkit-box-shadow: 1px 1px 1px #555;
+	background:#7E7E7E url(../images/bgMenu2.png) repeat-x top left;
 }
