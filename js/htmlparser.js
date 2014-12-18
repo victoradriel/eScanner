@@ -582,55 +582,57 @@
 	 * @author Victor Adriel 
 	 */
 	function detectaErroAttr(name, value){
-		switch (name.toLowerCase()){
-		case "alt": 
-			codErr[9] = 1;
-			if((value=="")||(value.match(/^\s+$/))) codErr[16] = 1;
-			break;
-		case "type": 
-			if(value=="image") arrFlag[9] = 1;
-			break;
-		case "summary": 
-			codErr[18] = 1;
-			if((value=="")||(value.match(/^\s+$/))) codErr[19] = 1;
-			break;
-		case "target": 
-			if(value.toLowerCase() == "_blank") 
-				codErr[3] = 1;
-			break;
-		case "style": 
-			if(value.match(/[Bb][Ll][Ii][Nn][Kk]/))
-				codErr[6] = 1;
-			break;
-		case "src": 
-			if(value.match(/\.gif/))
-				mens[30].ocorrencia++;
-			break;
-		case "lang": 
-		case "xml:lang": 
-			codErr[7] = 1;
-			if((value=="")||(value.match(/^\s+$/))) codErr[15] = 1;
-			break;
-		case "coords": 
-			codErr[10] = 1;
-			if((value=="")||(value.match(/^\s+$/))) codErr[17] = 1;
-			break;
-		case "accesskey": 
-			if((value=="")||(value.match(/^\D+$/))) codErr[21] = 1;
-			break;
-		case "tabindex":
-			if(arrFlag[4]==-579) arrFlag[4] = value;
-			else{
-				arrFlag[5] = value;
-				if(arrFlag[4] > arrFlag[5]) codErr[2] = 1;
-				else{arrFlag[4] = arrFlag[5];}
-			}
-			break;
-		case "http-equiv": 
-			if(value.toLowerCase() == "refresh") 
-				codErr[5] = 1;
-			break;
-		}
+        if (name.toLowerCase().indexOf('data-') !== 0){
+            switch (name.toLowerCase()){
+            case "alt": 
+            	codErr[9] = 1;
+            	if((value=="")||(value.match(/^\s+$/))) codErr[16] = 1;
+            	break;
+            case "type": 
+            	if(value=="image") arrFlag[9] = 1;
+            	break;
+            case "summary": 
+            	codErr[18] = 1;
+            	if((value=="")||(value.match(/^\s+$/))) codErr[19] = 1;
+            	break;
+            case "target": 
+            	if(value.toLowerCase() == "_blank") 
+            		codErr[3] = 1;
+            	break;
+            case "style": 
+            	if(value.match(/[Bb][Ll][Ii][Nn][Kk]/))
+            		codErr[6] = 1;
+            	break;
+            case "src": 
+            	if(value.match(/\.gif/))
+            		mens[30].ocorrencia++;
+            	break;
+            case "lang": 
+            case "xml:lang": 
+            	codErr[7] = 1;
+            	if((value=="")||(value.match(/^\s+$/))) codErr[15] = 1;
+            	break;
+            case "coords": 
+            	codErr[10] = 1;
+            	if((value=="")||(value.match(/^\s+$/))) codErr[17] = 1;
+            	break;
+            case "accesskey": 
+            	if((value=="")||(value.match(/^\D+$/))) codErr[21] = 1;
+            	break;
+            case "tabindex":
+            	if(arrFlag[4]==-579) arrFlag[4] = value;
+            	else{
+            		arrFlag[5] = value;
+            		if(arrFlag[4] > arrFlag[5]) codErr[2] = 1;
+            		else{arrFlag[4] = arrFlag[5];}
+            	}
+            	break;
+            case "http-equiv": 
+            	if(value.toLowerCase() == "refresh") 
+            		codErr[5] = 1;
+            	break;
+            }
+        }
 	};
 	
 	/**
