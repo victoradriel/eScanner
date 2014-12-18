@@ -103,7 +103,7 @@ ul.menu li span{
 	height:460px;
 }
 .container2{
-	margin: 3px 0px;
+	margin: 3px 0px 0px 0px;
 	height:450px;
 }
 .mensagens{
@@ -129,6 +129,7 @@ ul.menu li span{
 .mensagens .item p, .principais .item p{
 	margin:0px 10px 4px 10px;
 	padding:10px 0px 10px 0;
+	font-size:15px;
 }
 .principais .item:focus,
 .principais .item:hover{
@@ -216,7 +217,7 @@ ul.menu li span{
 .help{
 	height:460px;
 	overflow-y:scroll;
-	margin: 3px 0px 17px 0px;
+	margin: 3px 0px 0px 0px;
 }
 .help .item  ul{
 	list-style:none;
@@ -238,6 +239,7 @@ a.bord{
 	text-shadow: 0 1px 1px #BBB;
 }
 .help .item{
+	font-size: 15px;
 	clear:both;
 	width:510px;
 	height:auto;
@@ -280,11 +282,13 @@ a.bord{
 	text-indent:15px;
 	margin: 5px 10px 10px 10px;
 	text-align:justify;
+	font-size: 15px;
 }
 .help p{
 	text-indent:15px;
 	margin: 5px 15px 10px 17px;
 	text-align:justify;
+	font-size: 15px;
 }
 .help .tituloHelp{
 	margin:21px 0px -5px 14px;
@@ -309,6 +313,7 @@ a[href='#topo']{
 	padding:5px 5px 5px 25px;
 	margin:30px 15px 20px 0px;	
 	background:url(../images/help/up.png) no-repeat top left;
+	font-size: 13px;
 }
 .links a{
 	text-decoration:none;
@@ -328,10 +333,12 @@ a[href='#topo']{
 .links .item p{
 	margin:0px 4px 4px 90px;
 	padding:3px 4px 0 0;
+	font-size: 15px;
 }
 .links .item h4{
 	margin:0px 4px 0px 90px;
 	padding:10px 4px 3px 0px;
+	font-size: 15px;
 }
 .links .item:focus,
 .links .item:hover{

@@ -14,7 +14,7 @@
 (function(){
 
 	// Expressões regulares para o parsing de tags e attributes
-	var startTag = /^<([-A-Za-z0-9_]+)((?:\s+\w+[-:]?\w+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/,
+	var startTag = /^<([-A-Za-z0-9_]+)((?:\s+\w+[-:]?\w*[-:]?\w+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/,
 		endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/,
 		attr = /([-A-Za-z0-9_]+)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
 		
@@ -250,7 +250,7 @@
 						arguments[3] ? arguments[3] :
 						arguments[4] ? arguments[4] :
 						fillAttrs[name] ? name : "";
-						
+
 						detectaErroAttr(name, value);
 
 					attrs.push({

@@ -141,11 +141,12 @@ $().ready(function(){
 	});
 	
 	// Gerar visualização do código em forma de árvore radial /////////////////////////////////////////////////////////////////
-	function gerartree(jsontext){			
+	function gerartree(jsontext){	
+
 		var treeHeight = $("div.json").height();
 		var treeWidth = $("div.json").width();
 		var radius = treeWidth/2;
-
+		
 		var tree = d3.layout.tree()
 			.size([360, radius - 60])
 			.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
@@ -158,7 +159,7 @@ $().ready(function(){
 			.attr("height", treeHeight)
 			.append("g")
 			.attr("transform", "translate(" + treeWidth/2 + "," + treeHeight/2 + ")");
-		
+
 		json = JSON.parse(jsontext);
 		var nodes = tree.nodes(json);
 
@@ -173,7 +174,7 @@ $().ready(function(){
 			.enter().append("g")
 			.attr("class", "node")
 			.attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; });
-		  
+  
 		node.append("circle")
 			.attr("r", treeWidth/90)
 			.style("stroke",function(d){ 

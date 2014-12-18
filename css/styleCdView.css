@@ -262,6 +262,7 @@ a.bord{
 	text-shadow: 0 1px 1px #BBB;
 }
 .help .item{
+	font-size: 15px;
 	clear:both;
 	width:510px;
 	height:auto;
@@ -304,11 +305,13 @@ a.bord{
 	text-indent:15px;
 	margin: 5px 10px 10px 10px;
 	text-align:justify;
+	font-size: 15px;
 }
 .help p{
 	text-indent:15px;
-	margin: 5px 15px 10px 17px;
+	margin: 5px 30px 10px 17px;
 	text-align:justify;
+	font-size: 15px;
 }
 .help .tituloHelp{
 	margin:21px 0px -5px 14px;
@@ -331,8 +334,9 @@ a.bord{
 a[href='#topo']{
 	float:right;
 	padding:5px 5px 5px 25px;
-	margin:30px 15px 20px 0px;	
+	margin:30px 30px 20px 0px;	
 	background:url(../images/help/up.png) no-repeat top left;
+	font-size: 13px;
 }
 .links a{
 	text-decoration:none;
@@ -352,10 +356,12 @@ a[href='#topo']{
 .links .item p{
 	margin:0px 4px 4px 90px;
 	padding:3px 4px 0 0;
+	font-size: 15px;
 }
 .links .item h4{
 	margin:0px 4px 0px 90px;
 	padding:10px 4px 3px 0px;
+	font-size: 15px;
 }
 .links .item:focus,
 .links .item:hover{
@@ -451,6 +457,7 @@ a[href='#topo']{
 	position:absolute;
 }
 #pagName{
+	font-size:15px;
 	position:absolute;
 	right: 90px;
 	top: 49px;
@@ -484,6 +491,7 @@ a[href='#topo']{
 }
 .button{
 	background:#FFF;
+	height:20px;
 	margin:0px 0px 0px 6px;
 	background:#7E7E7E url(../images/bgMenu.png) repeat-x top left;
 	-webkit-box-shadow: 2px 2px 3px #555;
@@ -491,7 +499,7 @@ a[href='#topo']{
     -webkit-border-top-left-radius: 4px;
     -webkit-border-bottom-right-radius: 4px;
     -webkit-border-bottom-left-radius: 4px;
-	padding:5px 0px 5px 0px;
+	padding:9px 0px 1px 0px;
 }
 .button a{
 	padding:0 15px 5px 15px;
